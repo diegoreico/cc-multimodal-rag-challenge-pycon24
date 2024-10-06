@@ -11,7 +11,7 @@
 
 ## Configuración del entorno de ejecución
 
-Se asume que los datos del resto se encuentran, descargados, descomprimidos y localizados en la raíz del repositorio
+Se asume que los datos del retoo se encuentran, descargados, descomprimidos y localizados en la raíz del repositorio
 
 ## Esquema de la solución
 
