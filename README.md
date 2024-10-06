@@ -3,8 +3,8 @@
 
 ## Dependencias
 
-python 3.11
-requirements.txt
+- python 3.11
+- requirements.txt
 
 ## Configuración del entorno de ejecución
 
@@ -27,3 +27,29 @@ Se asume que los datos del resto se encuentran, descargados, descomprimidos y lo
     - proporcionar los resultados de búsqueda obtenidos a un LLM para que use como contexto, junto con las imágenes asociadas
     - proporcionar ciertas explicabilidad sobre la decisión tomada por el modelo
     - capacidades de logging para controlar las operaciones de fondo realizadas
+
+
+## Demos
+
+### Elizabeth II
+
+#### Imagen
+
+![Imagen Elizabeth II](misc/Queen_Elizabeth_II_in_March_2015_3.jpg)
+
+Expected Search Results: 
+- Claim 1 - Newschecker (India)
+- Claim 2 - Boom Live (India)
+
+##### Texto 
+
+    la reina elizabeth II ha alimentado a niños como si se tratasen de animales?
+
+Expected Search Results:
+- Claim 1 - Alt News (India)
+- Claim 2 - Alt News (India)
+- Claim 3 - ICIR Nigeria (Unknown)
+
+##### COMBINADO
+
+Aparecen los 5 claims y la clasificación final tiene más certeza. Ahora aparece como False y precviamente como partially False
