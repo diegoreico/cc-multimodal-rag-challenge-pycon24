@@ -1,6 +1,6 @@
 
 
-
+Solucion desarrollada en el [reto propuesto por Newtral en el Hackaton de la Pycon España 2024](https://github.com/Newtral-Tech/cc-multimodal-rag-challenge-pycon24)
 
 [![Youtube Demo](misc/Captura%20desde%202024-10-06%2008-40-02.png)](https://youtu.be/BdJ3xwUYGvU)
 
