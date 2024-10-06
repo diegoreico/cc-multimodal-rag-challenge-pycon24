@@ -56,3 +56,33 @@ Expected Search Results:
 ##### COMBINADO
 
 Aparecen los 5 claims y la clasificación final tiene más certeza. Ahora aparece como False y precviamente como partially False
+
+## Como responde esta solución a los resto de evaluación
+
+Se asignarán puntos en base a los siguientes criterios de evaluación.
+
+- 30 - Soporte multimodal en la recuperación de información: busca documentos candidatos atendiendo a la información del texto y de la imagen
+    - la solución permite búscar por texto para recuperar el texto de claims similares e imágenes (de las cuales se compaara también la query con la descripción de la imagen)
+    - se puede buscar proporcionando únicamente una imágen, lo que proporcionará todos los claims que contengan una imagen con un embedding similar al proporcionado
+    - se puede hacer una búsqueda combinando texto e imagen, que en una única acción, combina los resultados de los puntos anteriores
+
+- 20 - Desempeño: se lanzan 5 preguntas y se asignan los puntos en la medida que estas respuestas incluyen información de alguno de los contenidos filtrados
+    - dado un prompt de un usuario, este se envía a un LLM que reformula el prompt y proporciona 5 prompts diferentes, que son los que usarán para para realizar las búsquedas por texto. Los resultos de las 5 búsquedas se combinan y ordenan de cara a proporcionar un único resultado
+
+- 15 - Soporte multimodal en los elementos de búsqueda: permite incluir como entrada una imagen
+    - como se ha comentado en el primer punto, está soportado
+
+- 10 - Evaluación: se implementa alguna métrica de evaluación válida para la recuperación y/o la generación
+    - A través de la base de datos vectorial utilizada ([Milvus](https://milvus.io/)), los textos e imágenes se filtran de forma que tengan un score de similitud superior a un umbral. Para los textos se utiliza la métrica Inner product (IP) y para las imágenes la Euclidean distance (L2), [ambass proporcionados por Milvus](https://milvus.io/docs/metric.md?tab=floating).
+
+- 10 - Estrategia de reranking de documentos candidatos: incorporar algún modelo o estrategia para rerankear los candidatos
+    - En el código de la interfaz, se obtienen los scores de similitud de diferentes búsquedas y se combinan en un único score por resultado único.
+
+-  5 - Combinación de documentos en la respuesta: usar (si procede) más de un documento candidato para generar la respuesta
+    - se utilizan todos los documentos que superan los criterios de similitud.
+
+-  5 - Trazabilidad: se incluye algún método o herramienta de trazabilidad para depurar, monitorizar o auditar el uso de LLMs controlar el gasto de la solución en términos de uso de servicios externos o de tiempo
+    - en la interfaz realizadas, se muestra las búsquedas de texto realizadas, los resultados obtenidos de la búsqueda, el resultado generado en base a ellos y una explicación.
+
+-  5 - Control de la respuesta: el sistema responde que no tiene suficiente información para responder si no encuentra documentos relevantes en el espacio de búsqueda
+    -  Se emite un mensaje genérico cuando ningún resultado de búsqueda supera los criterios mínimos de similitud
