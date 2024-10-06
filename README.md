@@ -17,19 +17,21 @@ Se asume que los datos del resto se encuentran, descargados, descomprimidos y lo
 
 ```mermaid
 flowchart TD
-    00_download_images --> updated_data_csv_file
-    00_download_images --> cr_images_folter 
+    
+
+    00_download_images --csv with link to local images--> updated_data_csv_file[/updated_data.csv/]
+    00_download_images --Stores all images in folder--> cr_images_folter[/cr_images/]
     updated_data_csv_file --> 01_transform_csv
-    01_transform_csv --> transformed_csv
+    01_transform_csv --Selected and rewrited fields--> transformed_csv[/transformed.csv/]
     transformed_csv --> 02_image_descriptions
     cr_images_folter --> 02_image_descriptions
-    02_image_descriptions --> data_with_image_descriptions
+    02_image_descriptions --CSV with a new column containing image summaries--> data_with_image_descriptions[/data_with_image_descriptions.csv/]
     data_with_image_descriptions --> 03_embeddings_milvus
     cr_images_folter --> 03_embeddings_milvus
-    03_embeddings_milvus --> Milvus
+    03_embeddings_milvus --Stores Metadata, text embeddings(BGEM3) and image embeddings(resnet50)--> Milvus((Milvus Vector DB))
     cr_images_folter --> 04_start_image_server
-    Milvus --> ui
-    04_start_image_server --> ui
+    04_start_image_server --retrieves needed sotres images for ui--> ui[Streamlit Web UI]
+    Milvus --queries text and image embeddings--> ui
 ```
 
 ## Orden de ejecución
