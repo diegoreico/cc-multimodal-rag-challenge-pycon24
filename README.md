@@ -13,6 +13,25 @@
 
 Se asume que los datos del resto se encuentran, descargados, descomprimidos y localizados en la raíz del repositorio
 
+## Esquema de la solución
+
+```mermaid
+flowchart TD
+    00_download_images --> updated_data_csv_file
+    00_download_images --> cr_images_folter 
+    updated_data_csv_file --> 01_transform_csv
+    01_transform_csv --> transformed_csv
+    transformed_csv --> 02_image_descriptions
+    cr_images_folter --> 02_image_descriptions
+    02_image_descriptions --> data_with_image_descriptions
+    data_with_image_descriptions --> 03_embeddings_milvus
+    cr_images_folter --> 03_embeddings_milvus
+    03_embeddings_milvus --> Milvus
+    cr_images_folter --> 04_start_image_server
+    Milvus --> ui
+    04_start_image_server --> ui
+```
+
 ## Orden de ejecución
 
 - **00_download_images.py**: descarga todas las imágenes del campo cr_imágenes asociado a cada claim.Las imágenes se guardan en la carpeta `cr_images`, donde a cada imagen se le asigna un uuid que es referenciado en el registro original de los datos proporcionados.**WARNING: TARDA EN EJECUTARSE**
