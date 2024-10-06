@@ -282,7 +282,8 @@ def response_generator():
         yield word + " "
         time.sleep(0.05)
 
-st.title("The Mother Fact Checker")
+st.title(":ocean: FISTERRA	:octopus:")
+st.markdown("(**F**iltro **I**nteligente y **S**istemático de **T**extos **E**rróneos y **R**umores **R**ápidamente **A**nalizados")
 
 # Initialize chat history
 if "messages" not in st.session_state:
